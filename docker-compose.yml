@@ -15,7 +15,7 @@ services:
     tty: true
     stdin_open: true
     env_file: ./.env
-    command: bundle exec rails s -b 0.0.0.0
+    command: ./script/start.sh
     ports:
       - "3000:3000"
     links:
@@ -23,3 +23,10 @@ services:
       - redis
     volumes:
       - .:/myapp
+    volumes_from:
+      - cache
+
+  cache:
+    image: busybox
+    volumes:
+      - /cache
