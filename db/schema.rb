@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20160708020928) do
     t.datetime "updated_at", null: false
     t.string   "email"
     t.string   "password"
+    t.index ["email"], name: "index_users_on_email", using: :btree
   end
 
 end
