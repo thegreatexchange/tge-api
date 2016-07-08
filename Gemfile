@@ -5,6 +5,7 @@ gem 'pg',                       '~> 0.18'
 gem 'puma',                     '~> 3.0'
 gem 'rapid_api',                '0.1'
 gem 'active_model_serializers', '0.9'
+gem 'attr_encrypted',           '~> 3.0.0' # NOTE: Getting deprecation warnings from this gem.
 
 group :development, :test do
   gem 'byebug', platform: :mri

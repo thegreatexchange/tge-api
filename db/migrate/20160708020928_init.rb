@@ -4,7 +4,8 @@ class Init < ActiveRecord::Migration[5.0]
     create_table :users do |t|
       t.timestamps
       t.string :email, index: true, unique: true
-      t.string :password
+      t.string :encrypted_password
+      t.string :encrypted_password_iv
     end
   end
 
