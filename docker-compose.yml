@@ -30,3 +30,14 @@ services:
     image: busybox
     volumes:
       - /cache
+
+  client:
+    image: danlynn/ember-cli:2.5.1
+    volumes:
+      - ../tge-admin-client:/myapp
+    command: server --watcher polling --proxy=http://web:3000
+    links:
+      - web
+    ports:
+      - "4200:4200"
+      - "49152:49152"
