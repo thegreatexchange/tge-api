@@ -7,10 +7,9 @@ GIT
 
 GIT
   remote: https://github.com/briandavidwetzel/rapid_api.git
-  revision: 05a5f3787b895b4de55951c667f4a49a8f61b7a7
-  branch: feature/jsonapiv1
+  revision: e9da0f3a75ea3a3402e7c5de851e9a9517058e11
   specs:
-    rapid_api (0.1.0)
+    rapid_api (0.2.0)
       actionpack (~> 5.0)
       jwt (~> 1.5)
 
