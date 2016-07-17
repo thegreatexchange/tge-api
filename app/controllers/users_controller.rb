@@ -2,6 +2,6 @@ class UsersController < ApplicationController
 
   rapid_actions
 
-  permit_params :email, :password
+  permit_params :name, :email
 
 end
