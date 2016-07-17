@@ -13,9 +13,12 @@ class SessionsController < ApplicationController
   end
 
   responds_with do |authenticated|
+    token_payload = {
+      user_id: authenticated.id
+    }
     {
-      token: jwt_encode({ user_id: authenticated.id }),
-      user: {
+      token: JWT.encode(token_payload, nil, 'none'),
+      data: {
         id:    authenticated.id,
         email: authenticated.email
       }
