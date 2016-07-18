@@ -18,10 +18,9 @@ class SessionsController < ApplicationController
     }
     {
       token: JWT.encode(token_payload, nil, 'none'),
-      data: {
-        id:    authenticated.id,
-        email: authenticated.email
-      }
+      id:    authenticated.id,
+      email: authenticated.email,
+      is_super: authenticated.super
     }
   end
 

@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: https://github.com/briandavidwetzel/rapid_api.git
-  revision: e9da0f3a75ea3a3402e7c5de851e9a9517058e11
+  revision: da1b4251bcb5a2716da6d1f00894141021517e3f
   specs:
     rapid_api (0.2.0)
       actionpack (~> 5.0)
