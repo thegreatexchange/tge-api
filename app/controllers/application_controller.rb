@@ -2,20 +2,20 @@ class ApplicationController < ActionController::API
 
   rapid_base_controller
 
-  authenticate do |controller|
-    authorization_header = controller.request.headers['Authorization']
+  authorize do
+    user = nil
+
+    authorization_header = request.headers['Authorization']
     if authorization_header.present?
       token = authorization_header.split(' ')[1]
-      decoded_token = controller.decode_jwt_token!(token)
+      decoded_token = decode_jwt_token!(token)
       user_id = decoded_token[0].try :[], 'user_id'
       if user_id.present?
-        User.find user_id
-      else
-        nil
+        user = User.find user_id
       end
-    else
-      nil
     end
+
+    user
   end
 
   def render_error_message(message, status, e)

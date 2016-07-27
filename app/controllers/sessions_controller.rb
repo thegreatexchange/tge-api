@@ -5,11 +5,7 @@ class SessionsController < ApplicationController
   authenticates_with :email, :password do |params|
     user = User.find_by email: params[:email]
 
-    if user.present? && user.password == params[:password]
-      user
-    else
-      nil
-    end
+    user.present? && user.password == params[:password] ? user : nil
   end
 
   responds_with do |authenticated|
