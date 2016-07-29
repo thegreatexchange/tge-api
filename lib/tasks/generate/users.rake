@@ -5,7 +5,7 @@ namespace :generate do
 
     desc "Seed users"
     task :seed, [:count] => [:environment, :super] do |t, args|
-      count = args[:count].to_i || 1
+      count = args[:count] ? args[:count].to_i : 25
       count.times do
         User.create email:    Faker::Internet.email,
                     name:     Faker::Name.name,
