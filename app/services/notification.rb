@@ -1,0 +1,3 @@
+class NotificationService < BaseService
+
+end
