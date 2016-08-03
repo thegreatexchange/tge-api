@@ -17,6 +17,14 @@ class Init < ActiveRecord::Migration[5.0]
       t.string :phone_number
       t.string :location
     end
+
+    create_table :notifications do |t|
+      t.timestamps
+      t.datetime   :sent_at
+      t.references :sent_by
+      t.references :sent_to, polymorphic: true
+      t.json       :data
+    end
   end
 
 end
