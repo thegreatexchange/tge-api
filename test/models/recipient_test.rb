@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class NotificationTest < ActiveSupport::TestCase
+class RecipientTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
