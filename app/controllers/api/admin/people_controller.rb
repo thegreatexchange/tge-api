@@ -1,4 +1,4 @@
-class PeopleController < ApplicationController
+class Api::Admin::PeopleController < ApplicationController
 
   rapid_actions
 
