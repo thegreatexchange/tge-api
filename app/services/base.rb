@@ -28,7 +28,8 @@ class BaseService
     after_initialize
   end
 
-  def after_initialize;
+  def after_initialize
+  end
 
   def call
     raise NotImplementedError
