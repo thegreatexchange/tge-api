@@ -6,10 +6,10 @@ gem 'puma',                     '~> 3.0'
 gem 'rapid_api',                git: 'https://github.com/briandavidwetzel/rapid_api.git'
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'attr_encrypted',           git: 'https://github.com/attr-encrypted/attr_encrypted.git'
+gem 'faker'
 
 group :development, :test do
   gem 'byebug', platform: :mri
-  gem 'faker'
 end
 
 group :development do
