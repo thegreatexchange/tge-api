@@ -8,6 +8,18 @@ default: &default
 development:
   <<: *default
   database: myapp_development
+
 test:
   <<: *default
   database: myapp_test
+
+development:
+  <<: *default
+  database: tge-api-prod
+
+# production:
+#   database: <%= ENV['RDS_DB_NAME'] %>
+#   username: <%= ENV['RDS_USERNAME'] %>
+#   password: <%= ENV['RDS_PASSWORD'] %>
+#   host: <%= ENV['RDS_HOSTNAME'] %>
+#   port: <%= ENV['RDS_PORT'] %>

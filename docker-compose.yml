@@ -3,21 +3,32 @@ services:
   db:
     image: postgres:9.4.1
     ports:
-      - "5432:5432"
+      - 5432:5432
 
   redis:
     image: redis:2.8
     ports:
-      - "6379:6379"
+      - 6379:6379
+
+  lb:
+      image: dockercloud/haproxy
+      links:
+        - web
+      volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
+      ports:
+        - 3000:80
 
   web:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
     tty: true
     stdin_open: true
     env_file: ./.env
     command: bundle exec rails s -b 0.0.0.0
-    ports:
-      - "3000:3000"
+    expose:
+      - 3000
     links:
       - db
       - redis
@@ -35,9 +46,9 @@ services:
     image: danlynn/ember-cli:2.5.1
     volumes:
       - ../tge-admin-client:/myapp
-    command: server --watcher polling --proxy=http://web:3000
+    command: server --watcher polling --proxy=http://lb
     links:
       - web
     ports:
-      - "4200:4200"
-      - "49152:49152"
+      - 4200:4200
+      - 49152:49152
