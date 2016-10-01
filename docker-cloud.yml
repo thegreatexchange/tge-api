@@ -1,28 +1,23 @@
 lb:
-  image: dockercloud/haproxy
+  image: 'dockercloud/haproxy:latest'
   links:
     - web
   ports:
-    - '3000:80'
+    - '80:80'
   roles:
     - global
-
 web:
-  image: thegreatexchange/tge-api
-  command: bundle exec rails s -b 0.0.0.0
-  expose:
-    - '3000'
-  volumes:
-    - .:/myapp
-  links:
-    - db
-    - redis
+  image: 'thegreatexchange/tge-api:latest'
+  command: bundle exec rails s -b 0.0.0.0 -p 80
   environment:
     - RAILS_ENV=production
     - RAILS_MAX_THREADS=5
-    # - RDS_DB_NAME=
-    # - RDS_USERNAME=
-    # - RDS_PASSWORD=
-    # - RDS_HOSTNAME=
-    # - RDS_PORT=
+    - RDS_DB_NAME=tge_api_prod
+    - RDS_HOSTNAME=
+    - RDS_PASSWORD=
+    - RDS_PORT=
+    - RDS_USERNAME=
+    - SECRET_KEY_BASE=
+  expose:
+    - '80'
   target_num_containers: 2

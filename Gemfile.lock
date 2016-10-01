@@ -124,6 +124,7 @@ GEM
     rb-fsevent (0.9.7)
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
+    redis (3.3.1)
     spring (1.7.2)
     spring-watcher-listen (2.0.0)
       listen (>= 2.7, < 4.0)
@@ -156,6 +157,7 @@ DEPENDENCIES
   puma (~> 3.0)
   rails (~> 5.0.0)
   rapid_api!
+  redis
   spring
   spring-watcher-listen (~> 2.0.0)
 

@@ -7,6 +7,7 @@ gem 'rapid_api',                git: 'https://github.com/briandavidwetzel/rapid_
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'attr_encrypted',           git: 'https://github.com/attr-encrypted/attr_encrypted.git'
 gem 'faker'
+gem 'redis'
 
 group :development, :test do
   gem 'byebug', platform: :mri
