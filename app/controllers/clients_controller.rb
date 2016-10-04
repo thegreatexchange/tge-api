@@ -5,7 +5,7 @@ class ClientsController < ApplicationController
     redis        = Redis.new(url: ENV['REDIS_URL'])
     revision     = params[:revision] || ENV['CLIENT_REVISION'] || redis.get("tge-admin-client:index:current")
 
-    render html: redis.get("tge-admin-client:index:#{revision}"), layout: false
+    render body: redis.get("tge-admin-client:index:#{revision}"), content_type: 'text/html'
   end
 
 end

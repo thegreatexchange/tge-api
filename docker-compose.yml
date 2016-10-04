@@ -18,11 +18,11 @@ services:
     stdin_open: true
     env_file: ./.env
     command: bundle exec rails s -b 0.0.0.0
-    ports:
-      - "3000:3000"
     links:
       - db
       - redis
+    ports:
+      - '3000:3000'
     volumes:
       - .:/myapp
     volumes_from:

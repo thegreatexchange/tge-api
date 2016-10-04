@@ -1,23 +1,21 @@
-lb:
-  image: 'dockercloud/haproxy:latest'
-  links:
-    - web
+db:
+  image: 'postgres:9.4.1'
   ports:
-    - '80:80'
-  roles:
-    - global
+    - '5432:5432'
+redis:
+  image: 'redis:2.8'
+  ports:
+    - '6379:6379'
 web:
-  image: 'thegreatexchange/tge-api:latest'
   command: bundle exec rails s -b 0.0.0.0 -p 80
   environment:
     - RAILS_ENV=production
     - RAILS_MAX_THREADS=5
-    - RDS_DB_NAME=tge_api_prod
-    - RDS_HOSTNAME=
-    - RDS_PASSWORD=
-    - RDS_PORT=
-    - RDS_USERNAME=
+    - 'REDIS_URL=redis://redis:6379'
     - SECRET_KEY_BASE=
-  expose:
-    - '80'
-  target_num_containers: 2
+  image: 'thegreatexchange/tge-api:latest'
+  links:
+    - db
+    - redis
+  ports:
+    - '80:80'
