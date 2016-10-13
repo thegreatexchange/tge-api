@@ -2,7 +2,9 @@ Rails.application.routes.draw do
 
   post 'authenticate' => 'sessions#authenticate'
 
-  root controller: 'clients', action: :admin
+  # Clients
+  get 'admin', controller: 'clients', action: :admin
+  get 'event', controller: 'clients', action: :event
 
   namespace :api do
     namespace :admin do
