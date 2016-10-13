@@ -33,7 +33,7 @@ services:
     volumes:
       - /cache
 
-  client:
+  admin-client:
     image: danlynn/ember-cli:2.5.1
     volumes:
       - ../tge-admin-client:/myapp
@@ -42,4 +42,15 @@ services:
       - web
     ports:
       - "4200:4200"
+      - "49152:49152"
+
+  event-client:
+    image: danlynn/ember-cli:2.8.0
+    volumes:
+      - ../tge-event-client:/myapp
+    command: server --watcher polling --proxy=http://web:3000 --port 4201
+    links:
+      - web
+    ports:
+      - "4201:4201"
       - "49152:49152"
