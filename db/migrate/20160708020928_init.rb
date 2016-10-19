@@ -12,23 +12,13 @@ class Init < ActiveRecord::Migration[5.0]
 
     create_table :people do |t|
       t.timestamps
+      t.string :type
       t.string :name
       t.string :email
       t.string :phone_number
       t.string :location
-    end
-
-    create_table :messages do |t|
-      t.timestamps
-      t.datetime   :sent_at
-      t.references :person
-      t.json       :data
-    end
-
-    create_table :recipients do |t|
-      t.timestamps
-      t.references :message
-      t.references :person
+      t.string :school
+      t.string :ministry
     end
   end
 

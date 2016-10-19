@@ -7,12 +7,10 @@
 # t.string   "email"
 # t.string   "phone_number"
 # t.string   "location"
+# t.string   "school"
+# t.string   "ministry"
 ########################################
 
 class Person < ApplicationRecord
-
-  has_many :sent_messages, class_name: 'Message'
-  has_many :received_messages, through: :recipients, source: :message
-  has_many :recipients
 
 end
