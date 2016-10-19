@@ -15,9 +15,9 @@ namespace :generate do
 
     desc "Generate super user"
     task :super, [:name, :email, :password] => [:environment] do |t, args|
-      name     = args[:name]     || 'Super Admin'
-      email    = args[:email]    || 'super@test.com'
-      password = args[:password] || 'password'
+      name     = args[:name]     || ENV['SUPER_NAME']     ||'Super Admin'
+      email    = args[:email]    || ENV['SUPER_EMAIL']    ||'super@test.com'
+      password = args[:password] || ENV['SUPER_PASSWORD'] || 'password'
 
       User.create email:    email,
                   name:     name,
