@@ -12,10 +12,11 @@ class Init < ActiveRecord::Migration[5.0]
 
     create_table :locations do |t|
       t.timestamps
-      t.string :name
+      t.string :region
       t.string :country
       t.string :state
       t.string :city
+      t.string :zip
     end
 
     create_table :schools do |t|

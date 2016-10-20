@@ -18,10 +18,11 @@ ActiveRecord::Schema.define(version: 20160708020928) do
   create_table "locations", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string   "name"
+    t.string   "region"
     t.string   "country"
     t.string   "state"
     t.string   "city"
+    t.string   "zip"
   end
 
   create_table "ministries", force: :cascade do |t|
