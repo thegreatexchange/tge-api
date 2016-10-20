@@ -1,4 +1,4 @@
-class Api::Admin::LocationsController < ApplicationController
+class Api::Admin::SchoolsController < ApplicationController
 
   rapid_actions
 

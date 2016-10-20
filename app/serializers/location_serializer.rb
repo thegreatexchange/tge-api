@@ -1,4 +1,4 @@
-class LocationSerizializer < ActiveModel::Serializer
+class LocationSerializer < ActiveModel::Serializer
 
   attributes :id,
              :created_at,

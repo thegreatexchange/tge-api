@@ -16,4 +16,7 @@
 
 class Person < ApplicationRecord
 
+  belongs_to :location
+  belongs_to :school
+  belongs_to :ministry
 end
