@@ -22,7 +22,7 @@ namespace :generate do
                                name:     name,
                                password: password
 
-      AuthorizationService.add_authorization user: super_user, authorization_name: Authorization::VALID_NAMES[:super]
+      AuthorizationService.add_authorization user: super_user, name: Authorization::VALID_NAMES[:super]
     end
 
   end

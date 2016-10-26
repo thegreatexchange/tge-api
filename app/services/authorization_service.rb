@@ -13,13 +13,13 @@ class AuthorizationService < BaseService
   end
 
   def authorize
-    authorization_name = params[:type]
+    authorization_name = params[:name]
     user               = params[:user]
 
-    return add_error(:user, 'Does not exist.')          unless user.present? && user.id.present?
+    return add_error(:user, 'Does not exist.') unless user.present? && user.id.present?
 
     authorization = user.user_authorizations.joins(:authorization).where(is_active:true, authorizations: { name: authorization_name }).first
-    set_data authorized: authorization.present?
+    return_value authorization.present?
   end
 
 end

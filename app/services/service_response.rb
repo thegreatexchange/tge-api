@@ -1,12 +1,8 @@
 class ServiceResponse
-  attr_accessor :data, :errors
+  attr_accessor :value, :errors
 
   def has_errors?
     !errors.empty?
-  end
-
-  def data
-    @data ||= {}
   end
 
   def errors

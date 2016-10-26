@@ -38,8 +38,8 @@ class BaseService
     error_key << message
   end
 
-  def set_data(data)
-    response.data = data
+  def return_value(value)
+    response.value = value
   end
 
 end
