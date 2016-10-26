@@ -1,5 +1,6 @@
 namespace :generate do
   namespace :locations do
+
     desc "Seed locations"
     task :seed => [ :environment ] do |t, args|
       [
@@ -9,5 +10,6 @@ namespace :generate do
         Location.create params
       end
     end
+
   end
 end

@@ -1,6 +1,5 @@
 require 'faker'
 namespace :generate do
-
   namespace :users do
 
     desc "Seed users"
@@ -19,12 +18,12 @@ namespace :generate do
       email    = args[:email]    || ENV['SUPER_EMAIL']    ||'super@test.com'
       password = args[:password] || ENV['SUPER_PASSWORD'] || 'password'
 
-      User.create email:    email,
-                  name:     name,
-                  password: password,
-                  super:    true
+      super_user = User.create email:    email,
+                               name:     name,
+                               password: password
+
+      AuthorizationService.add_authorization user: super_user, authorization_name: Authorization::VALID_NAMES[:super]
     end
 
   end
-
 end

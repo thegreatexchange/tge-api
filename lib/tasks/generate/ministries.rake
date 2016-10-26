@@ -1,5 +1,6 @@
 namespace :generate do
   namespace :ministries do
+
     desc "Seed ministries"
     task :seed => [ :environment ] do |t, args|
       [
@@ -10,6 +11,7 @@ namespace :generate do
         Ministry.create params
       end
     end
+
   end
 end
 

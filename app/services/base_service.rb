@@ -1,11 +1,10 @@
 class BaseService
 
-  attr_accessor :user,
-                :params,
+  attr_accessor :params,
                 :response
 
-  def self.call(params, user=nil)
-    service = self.new(params, user)
+  def self.call(params)
+    service = self.new(params)
     service.call()
     return service.response
   end
@@ -20,11 +19,9 @@ class BaseService
     end
   end
 
-  def initialize(params={}, profile=nil, user=nil)
-    self.user     = user
-    self.params   = params
-    self.response = ServiceResponse.new
-
+  def initialize(params={})
+    @params   = params
+    @response = ServiceResponse.new
     after_initialize
   end
 

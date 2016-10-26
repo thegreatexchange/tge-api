@@ -15,6 +15,13 @@ ActiveRecord::Schema.define(version: 20160708020928) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "authorizations", force: :cascade do |t|
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "name"
+    t.string   "description"
+  end
+
   create_table "locations", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -36,20 +43,30 @@ ActiveRecord::Schema.define(version: 20160708020928) do
   end
 
   create_table "people", force: :cascade do |t|
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
     t.string   "type"
-    t.integer  "location_id"
     t.integer  "school_id"
     t.integer  "ministry_id"
     t.string   "name"
     t.string   "email"
     t.string   "phone_number"
+    t.text     "registration_comments"
     t.boolean  "is_text_enabled"
     t.boolean  "is_email_enabled"
-    t.index ["location_id"], name: "index_people_on_location_id", using: :btree
     t.index ["ministry_id"], name: "index_people_on_ministry_id", using: :btree
     t.index ["school_id"], name: "index_people_on_school_id", using: :btree
+  end
+
+  create_table "person_locations", force: :cascade do |t|
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "person_id"
+    t.integer  "location_id"
+    t.boolean  "is_active",   default: true
+    t.index ["location_id"], name: "index_person_locations_on_location_id", using: :btree
+    t.index ["person_id", "location_id"], name: "index_person_locations_on_person_id_and_location_id", using: :btree
+    t.index ["person_id"], name: "index_person_locations_on_person_id", using: :btree
   end
 
   create_table "schools", force: :cascade do |t|
@@ -60,10 +77,20 @@ ActiveRecord::Schema.define(version: 20160708020928) do
     t.index ["location_id"], name: "index_schools_on_location_id", using: :btree
   end
 
+  create_table "user_authorizations", force: :cascade do |t|
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.integer  "user_id"
+    t.integer  "authorization_id"
+    t.boolean  "is_active",        default: true
+    t.index ["authorization_id"], name: "index_user_authorizations_on_authorization_id", using: :btree
+    t.index ["user_id", "authorization_id"], name: "index_user_authorizations_on_user_id_and_authorization_id", using: :btree
+    t.index ["user_id"], name: "index_user_authorizations_on_user_id", using: :btree
+  end
+
   create_table "users", force: :cascade do |t|
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
-    t.boolean  "super",                 default: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
     t.string   "name"
     t.string   "email"
     t.string   "encrypted_password"

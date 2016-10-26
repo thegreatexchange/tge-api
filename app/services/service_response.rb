@@ -10,7 +10,7 @@ class ServiceResponse
   end
 
   def errors
-    @errors ||= {}
+    @errors ||= HashWithIndifferentAccess.new
   end
 
 end
