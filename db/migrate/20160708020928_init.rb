@@ -25,11 +25,14 @@ class Init < ActiveRecord::Migration[5.0]
 
     create_table :locations do |t|
       t.timestamps
-      t.string :region
-      t.string :country
-      t.string :state
-      t.string :city
-      t.string :zip
+      t.string  :name
+      t.string  :country
+      t.string  :region
+      t.string  :state
+      t.string  :city
+      t.string  :zip
+      t.string  :address
+      t.string  :timezone
     end
 
     create_table :schools do |t|
@@ -53,17 +56,33 @@ class Init < ActiveRecord::Migration[5.0]
       t.string     :name
       t.string     :email
       t.string     :phone_number
-      t.text       :registration_comments
       t.boolean    :is_text_enabled
       t.boolean    :is_email_enabled
+    end
+
+    create_table :events do |t|
+      t.timestamps
+      t.belongs_to :location
+      t.belongs_to :school
+      t.belongs_to :ministry
+      t.datetime   :starts_at
+      t.datetime   :ends_at
+      t.text       :description
+    end
+
+    create_table :event_registrations do |t|
+      t.timestamps
+      t.belongs_to :event
+      t.belongs_to :person
+      t.text       :comments
     end
 
     create_table :person_locations do |t|
       t.timestamps
       t.belongs_to :person
       t.belongs_to :location
-      t.index   [:person_id, :location_id]
-      t.boolean :is_active, default: true
+      t.index      [:person_id, :location_id]
+      t.boolean    :is_active, default: true
     end
 
   end

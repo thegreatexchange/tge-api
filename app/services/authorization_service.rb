@@ -9,7 +9,7 @@ class AuthorizationService < BaseService
 
     # TODO: Handle validation errors on user authorization creation
     authorization = UserAuthorization.create user_id: user.id, authorization_id: authorization.id
-    set_data authorization: authorization
+    return_value authorization: authorization
   end
 
   def authorize

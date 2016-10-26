@@ -22,14 +22,41 @@ ActiveRecord::Schema.define(version: 20160708020928) do
     t.string   "description"
   end
 
+  create_table "event_registrations", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "event_id"
+    t.integer  "person_id"
+    t.text     "comments"
+    t.index ["event_id"], name: "index_event_registrations_on_event_id", using: :btree
+    t.index ["person_id"], name: "index_event_registrations_on_person_id", using: :btree
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "location_id"
+    t.integer  "school_id"
+    t.integer  "ministry_id"
+    t.datetime "starts_at"
+    t.datetime "ends_at"
+    t.text     "description"
+    t.index ["location_id"], name: "index_events_on_location_id", using: :btree
+    t.index ["ministry_id"], name: "index_events_on_ministry_id", using: :btree
+    t.index ["school_id"], name: "index_events_on_school_id", using: :btree
+  end
+
   create_table "locations", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string   "region"
+    t.string   "name"
     t.string   "country"
+    t.string   "region"
     t.string   "state"
     t.string   "city"
     t.string   "zip"
+    t.string   "address"
+    t.string   "timezone"
   end
 
   create_table "ministries", force: :cascade do |t|
@@ -43,15 +70,14 @@ ActiveRecord::Schema.define(version: 20160708020928) do
   end
 
   create_table "people", force: :cascade do |t|
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.string   "type"
     t.integer  "school_id"
     t.integer  "ministry_id"
     t.string   "name"
     t.string   "email"
     t.string   "phone_number"
-    t.text     "registration_comments"
     t.boolean  "is_text_enabled"
     t.boolean  "is_email_enabled"
     t.index ["ministry_id"], name: "index_people_on_ministry_id", using: :btree
