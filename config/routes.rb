@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       resources :locations,  only: [ :index, :show, :create, :update, :destroy ]
       resources :schools,    only: [ :index, :show, :create, :update, :destroy ]
       resources :ministries, only: [ :index, :show, :create, :update, :destroy ]
+      resources :events,     only: [ :index, :show, :create, :update, :destroy ]
     end
   end
 end
