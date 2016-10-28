@@ -1,6 +1,6 @@
 class Api::Admin::EventsController < ApplicationController
 
-  rapid_actions
+  rapid_actions model: Event.includes(:school, :ministry)
 
   permit_params :location_id,
                 :school_id,
