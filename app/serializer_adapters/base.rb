@@ -9,7 +9,7 @@ module SerializerAdapters
       attributes = params.require(:data).require(:attributes)
       relationships = params.require(:data).require(:relationships)
       relationships.keys.each do |attribute|
-       attributes["#{attribute}_id"] = relationships[attribute][:data][:id]
+       attributes["#{attribute}_id"] = relationships[attribute][:data].try(:[], :id)
       end
       attributes
     end

@@ -17,4 +17,8 @@ class Event < ApplicationRecord
   belongs_to :school
   belongs_to :ministry
 
+  def name
+    "#{school.name} - #{starts_at.to_date}"
+  end
+
 end
