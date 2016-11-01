@@ -1,4 +1,4 @@
-class UserSerializer < ActiveModel::Serializer
+class EventClient::UserSerializer < ActiveModel::Serializer
 
   attributes :id,
              :created_at,

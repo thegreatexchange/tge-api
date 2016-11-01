@@ -1,4 +1,4 @@
-class SchoolSerializer < ActiveModel::Serializer
+class EventClient::SchoolSerializer < ActiveModel::Serializer
 
   attributes :id,
              :created_at,

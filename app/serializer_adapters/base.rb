@@ -2,6 +2,15 @@ require 'rapid_api/serializer_adapters'
 
 module SerializerAdapters
   class Base < RapidApi::SerializerAdapters::AmsAdapter
+
+    def serialize_collection(collection)
+      collection_serializer = ActiveModel::Serializer::CollectionSerializer.new collection, {
+                           serializer: klass
+                         }
+      ActiveModelSerializers::Adapter.create(collection_serializer).to_json
+    end
+
+
     # NOTE: Need to add support for :attributes serialization
     def deserialize_attributes(params, root_key)
       #<ActionController::Parameters

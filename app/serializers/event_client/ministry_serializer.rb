@@ -1,4 +1,4 @@
-class MinistrySerializer < ActiveModel::Serializer
+class EventClient::MinistrySerializer < ActiveModel::Serializer
 
   attributes :id,
              :created_at,

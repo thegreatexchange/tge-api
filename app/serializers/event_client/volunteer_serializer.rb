@@ -1,4 +1,4 @@
-class PersonSerializer < ActiveModel::Serializer
+class EventClient::VolunteerSerializer < ActiveModel::Serializer
 
   attributes :id,
              :created_at,
