@@ -22,4 +22,25 @@ class Person < ApplicationRecord
   has_many   :person_locations, dependent: :destroy
   has_many   :locations, through: :person_locations
 
+  validates :name,         presence:   true
+  validates :email,        presence:   true,
+                           uniqueness: true,
+                           format: {
+                             with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i,
+                             if: :_allow_email_format_validation?
+                           }
+  validates :phone_number, format: {
+                             with: /\A(\d{10}|\(?\d{3}\)?[-. ]\d{3}[-.]\d{4})\z/,
+                             if: :_allow_phone_number_format_validation?
+                           }
+
+  private
+
+  def _allow_email_format_validation?
+    email.present?
+  end
+
+  def _allow_phone_number_format_validation?
+    phone_number.present?
+  end
 end

@@ -11,6 +11,7 @@ class EventClient::VolunteerModelAdapter < RapidApi::ModelAdapters::ActiveRecord
       member = klass.create create_params
       if event_id.present? && !member.errors.any?
         event = Event.find event_id
+        #TODO: Handle event not found.
         EventRegistration.create event: event, person: member, comments: comments
       end
       _query_result_for_member member

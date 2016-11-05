@@ -26,12 +26,12 @@ services:
     volumes:
       - .:/myapp
     volumes_from:
-      - cache
+      - bundler-cache
 
-  cache:
+  bundler-cache:
     image: busybox
     volumes:
-      - /cache
+      - ./tmp/bundler-cache:/cache
 
   admin-client:
     image: danlynn/ember-cli:2.5.1
