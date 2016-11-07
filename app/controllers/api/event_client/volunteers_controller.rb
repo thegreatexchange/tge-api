@@ -10,6 +10,8 @@ class Api::EventClient::VolunteersController < ApplicationController
                 :name,
                 :email,
                 :phone_number,
+                :is_text_enabled,
+                :is_email_enabled,
                 :comments
 
 end

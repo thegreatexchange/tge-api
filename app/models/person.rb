@@ -21,6 +21,8 @@ class Person < ApplicationRecord
   belongs_to :ministry
   has_many   :person_locations, dependent: :destroy
   has_many   :locations, through: :person_locations
+  has_many   :event_registrations, dependent: :destroy
+  has_many   :events, through: :event_registrations
 
   validates :name,         presence:   true
   validates :email,        presence:   true,
