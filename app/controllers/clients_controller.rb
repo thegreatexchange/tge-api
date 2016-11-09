@@ -14,7 +14,7 @@ class ClientsController < ApplicationController
   def render_client(client_name)
     redis    = Redis.new(url: ENV['REDIS_URL'])
     revision = params[:revision] || ENV['CLIENT_REVISION'] || redis.get("#{client_name}:index:current")
-    body     = redis.get("#{client_name}:#{revision}")
+    body     = redis.get("#{client_name}:index:#{revision}")
 
     render body: body, content_type: 'text/html'
   end
