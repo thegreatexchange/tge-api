@@ -1,3 +1,0 @@
-class MessageService < BaseService
-
-end

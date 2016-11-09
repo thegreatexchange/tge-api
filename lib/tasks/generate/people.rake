@@ -1,6 +1,5 @@
 require 'faker'
 namespace :generate do
-
   namespace :people do
 
     desc 'Seed people'
@@ -15,5 +14,4 @@ namespace :generate do
     end
 
   end
-
 end

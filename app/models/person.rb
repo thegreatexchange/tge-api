@@ -1,18 +1,48 @@
 ########################################
 # Schema
 ########################################
-# t.datetime "created_at",   null: false
-# t.datetime "updated_at",   null: false
+# t.datetime "created_at",            null: false
+# t.datetime "updated_at",            null: false
+# t.string   "type"
+# t.integer  "school_id"
+# t.integer  "ministry_id"
 # t.string   "name"
 # t.string   "email"
 # t.string   "phone_number"
-# t.string   "location"
+# t.text     "registration_comments"
+# t.boolean  "is_text_enabled"
+# t.boolean  "is_email_enabled"
 ########################################
 
 class Person < ApplicationRecord
 
-  has_many :sent_messages, class_name: 'Message'
-  has_many :received_messages, through: :recipients, source: :message
-  has_many :recipients
+  belongs_to :location
+  belongs_to :school
+  belongs_to :ministry
+  has_many   :person_locations, dependent: :destroy
+  has_many   :locations, through: :person_locations
+  has_many   :event_registrations, dependent: :destroy
+  has_many   :events, through: :event_registrations
 
+  validates :name,         presence:   true
+  validates :email,        presence:   true,
+                           uniqueness: true,
+                           format: {
+                             with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i,
+                             if: :_allow_email_format_validation?
+                           }
+  validates :phone_number, format: {
+                             with: /\A(\d{10}|\(?\d{3}\)?[-. ]\d{3}[-.]\d{4})\z/,
+                             if: :_allow_phone_number_format_validation?
+                           }
+
+  private
+
+  def _allow_email_format_validation?
+    email.present?
+  end
+
+  def _allow_phone_number_format_validation?
+    phone_number.present?
+  end
 end
