@@ -2,6 +2,10 @@ class ClientsController < ApplicationController
   skip_before_action :authorize!
   before_action :ensure_trailing_slash
 
+  def home
+    redirect_to :event
+  end
+
   def admin
     render_client "tge-admin-client"
   end

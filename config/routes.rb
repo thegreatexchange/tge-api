@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  root to: 'clients#home'
+
   post 'authenticate' => 'sessions#authenticate'
 
   ########################################
