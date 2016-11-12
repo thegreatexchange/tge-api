@@ -2,9 +2,12 @@ Rails.application.routes.draw do
 
   post 'authenticate' => 'sessions#authenticate'
 
-  # Clients
-  get 'admin', controller: 'clients', action: :admin
-  get 'event', controller: 'clients', action: :event
+  ########################################
+  # Event Client
+  ########################################
+  get '/event',       to: 'clients#event'
+  get '/event/*path', to: 'clients#event'
+  ########################################
 
   namespace :api do
     namespace :admin do
@@ -16,6 +19,9 @@ Rails.application.routes.draw do
       resources :events,     only: [ :index, :show, :create, :update, :destroy ]
     end
 
+    ########################################
+    # Event Client API
+    ########################################
     namespace :event_client, path: 'event-client' do
       resources :volunteers, only: [ :index, :show, :create, :update           ]
       resources :locations,  only: [ :index, :show                             ]
@@ -23,5 +29,6 @@ Rails.application.routes.draw do
       resources :ministries, only: [ :index, :show                             ]
       resources :events,     only: [ :index, :show                             ]
     end
+    ########################################
   end
 end
