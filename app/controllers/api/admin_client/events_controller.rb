@@ -1,6 +1,6 @@
-class Api::Admin::EventsController < ApplicationController
+class Api::AdminClient::EventsController < ApplicationController
 
-  rapid_actions model: Event.includes(:school, :ministry)
+  rapid_actions model: Event.includes(:school, :ministry), serializer: ::AdminClient::EventSerializer
 
   permit_params :location_id,
                 :school_id,
