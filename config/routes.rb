@@ -5,6 +5,13 @@ Rails.application.routes.draw do
   post 'authenticate' => 'sessions#authenticate'
 
   ########################################
+  # Admin Client
+  ########################################
+  get '/admin',       to: 'clients#admin'
+  get '/admin/*path', to: 'clients#admin'
+  ########################################
+
+  ########################################
   # Event Client
   ########################################
   get '/event',       to: 'clients#event'
@@ -12,24 +19,28 @@ Rails.application.routes.draw do
   ########################################
 
   namespace :api do
-    namespace :admin do
-      resources :users,      only: [ :index, :show, :create, :update, :destroy ]
-      resources :people,     only: [ :index, :show, :create, :update, :destroy ]
-      resources :locations,  only: [ :index, :show, :create, :update, :destroy ]
-      resources :schools,    only: [ :index, :show, :create, :update, :destroy ]
-      resources :ministries, only: [ :index, :show, :create, :update, :destroy ]
+    ########################################
+    # Admin Client API
+    ########################################
+    namespace :admin_client, path: 'admin-client' do
       resources :events,     only: [ :index, :show, :create, :update, :destroy ]
+      resources :locations,  only: [ :index, :show, :create, :update, :destroy ]
+      resources :ministries, only: [ :index, :show, :create, :update, :destroy ]
+      resources :people,     only: [ :index, :show, :create, :update, :destroy ]
+      resources :schools,    only: [ :index, :show, :create, :update, :destroy ]
+      resources :users,      only: [ :index, :show, :create, :update, :destroy ]
     end
+    ########################################
 
     ########################################
     # Event Client API
     ########################################
     namespace :event_client, path: 'event-client' do
-      resources :volunteers, only: [ :index, :show, :create, :update           ]
-      resources :locations,  only: [ :index, :show                             ]
-      resources :schools,    only: [ :index, :show                             ]
-      resources :ministries, only: [ :index, :show                             ]
       resources :events,     only: [ :index, :show                             ]
+      resources :locations,  only: [ :index, :show                             ]
+      resources :ministries, only: [ :index, :show                             ]
+      resources :schools,    only: [ :index, :show                             ]
+      resources :volunteers, only: [ :index, :show, :create, :update           ]
     end
     ########################################
   end
