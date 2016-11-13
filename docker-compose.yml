@@ -34,7 +34,7 @@ services:
       - ./tmp/bundler-cache:/cache
 
   admin-client:
-    image: danlynn/ember-cli:2.5.1
+    image: danlynn/ember-cli:2.9.1
     volumes:
       - ../tge-admin-client:/myapp
     command: server --watcher polling --proxy=http://web:3000
