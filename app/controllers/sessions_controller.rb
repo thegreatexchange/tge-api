@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
   rapid_sessions_controller
 
   authenticates_with :email, :password do |params|
-    user = User.find_by email: params[:email]
+    user = User.where("lower(email)=lower(?)", params[:email]).first
 
     user.present? && user.password == params[:password] ? user : nil
   end
