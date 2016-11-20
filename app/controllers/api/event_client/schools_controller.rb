@@ -1,4 +1,4 @@
-class Api::EventClient::SchoolsController < ApplicationController
+class Api::EventClient::SchoolsController < Api::EventClient::BaseController
 
   rapid_actions serializer: ::EventClient::SchoolSerializer
 

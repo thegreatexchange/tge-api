@@ -1,4 +1,4 @@
-class Api::EventClient::EventsController < ApplicationController
+class Api::EventClient::EventsController < Api::EventClient::BaseController
 
   rapid_actions model: Event.includes(:school, :ministry), serializer: ::EventClient::EventSerializer
 

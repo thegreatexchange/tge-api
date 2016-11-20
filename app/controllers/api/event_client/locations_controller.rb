@@ -1,4 +1,4 @@
-class Api::EventClient::LocationsController < ApplicationController
+class Api::EventClient::LocationsController < Api::EventClient::BaseController
 
   rapid_actions serializer: ::EventClient::LocationSerializer
 

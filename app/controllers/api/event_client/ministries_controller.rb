@@ -1,4 +1,4 @@
-class Api::EventClient::MinistriesController < ApplicationController
+class Api::EventClient::MinistriesController < Api::EventClient::BaseController
 
   rapid_actions serializer: ::EventClient::MinistrySerializer
 

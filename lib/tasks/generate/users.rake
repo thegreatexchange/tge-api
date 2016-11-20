@@ -23,6 +23,8 @@ namespace :generate do
                                password: password
 
       AuthorizationService.add_authorization user: super_user, name: Authorization::VALID_NAMES[:super]
+      AuthorizationService.add_authorization user: super_user, name: Authorization::VALID_NAMES[:app_admin]
+      AuthorizationService.add_authorization user: super_user, name: Authorization::VALID_NAMES[:app_event]
     end
 
   end

@@ -13,13 +13,11 @@ class SessionsController < ApplicationController
       user_id: authenticated.id
     }
 
-    is_super = AuthorizationService.authorize(user: authenticated, name: 'super').value
-
     {
       token: JWT.encode(token_payload, nil, 'none'),
       id:    authenticated.id,
       email: authenticated.email,
-      is_super: is_super
+      authorizations: authenticated.active_authorizations.map(&:name)
     }
   end
 

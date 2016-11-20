@@ -1,4 +1,4 @@
-class Api::EventClient::VolunteersController < ApplicationController
+class Api::EventClient::VolunteersController < Api::EventClient::BaseController
 
   rapid_actions model:         People::Volunteer,
                 serializer:    ::EventClient::VolunteerSerializer,

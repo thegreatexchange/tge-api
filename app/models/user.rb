@@ -19,4 +19,8 @@ class User < ApplicationRecord
 
   validates_uniqueness_of :email
 
+  def active_authorizations
+    user_authorizations.joins(:authorization).where(is_active: true).map &:authorization
+  end
+
 end
