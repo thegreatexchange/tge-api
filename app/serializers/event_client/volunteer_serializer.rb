@@ -1,6 +1,6 @@
 class EventClient::VolunteerSerializer < ActiveModel::Serializer
 
-  type 'volunteer'
+  type 'volunteers'
 
   attributes :id,
              :created_at,

@@ -11,12 +11,16 @@ module SerializerAdapters
     end
 
 
-    # NOTE: Need to add support for :attributes serialization
     def deserialize_attributes(params, root_key)
-      attributes = params.require(:data).require(:attributes)
-      relationships = params.require(:data).require(:relationships)
-      relationships.keys.each do |attribute|
-       attributes["#{attribute}_id"] = relationships[attribute][:data].try(:[], :id)
+      attributes = params
+      if params[:data][:attributes].present?
+        attributes = params.require(:data).require(:attributes)
+      end
+      if params[:data][:relationships].present?
+        relationships = params.require(:data).require(:relationships)
+        relationships.keys.each do |attribute|
+         attributes["#{attribute}_id"] = relationships[attribute][:data].try(:[], :id)
+        end
       end
       attributes
     end
