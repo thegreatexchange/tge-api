@@ -12,4 +12,6 @@ class Organization < ApplicationRecord
   belongs_to :location
   has_many   :ministries
 
+  validates :name, presence:   true,
+                   uniqueness: true
 end

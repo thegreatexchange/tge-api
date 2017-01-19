@@ -16,4 +16,8 @@ class Event < ApplicationRecord
   belongs_to :location
   belongs_to :organization
 
+  validates :name, uniqueness: true,
+                   presence:   true
+  validates :starts_at, presence: true
+
 end
