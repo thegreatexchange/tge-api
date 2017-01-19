@@ -18,6 +18,6 @@ class Event < ApplicationRecord
 
   validates :name, uniqueness: true,
                    presence:   true
-  validates :starts_at, presence: true
+  # validates :starts_at, presence: true
 
 end

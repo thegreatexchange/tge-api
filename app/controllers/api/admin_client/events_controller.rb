@@ -6,6 +6,7 @@ class Api::AdminClient::EventsController < ApplicationController
                 :organization_id,
                 :starts_at,
                 :ends_at,
-                :description
+                :description,
+                :name
 
 end
