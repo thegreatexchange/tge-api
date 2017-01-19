@@ -8,15 +8,12 @@
 # t.datetime "starts_at"
 # t.datetime "ends_at"
 # t.text     "description"
+# t.string   "name"
 ########################################
 
 class Event < ApplicationRecord
 
   belongs_to :location
   belongs_to :organization
-
-  def name
-    "#{organization.name} - #{starts_at.to_date}"
-  end
 
 end

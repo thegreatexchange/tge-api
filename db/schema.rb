@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20160708020928) do
     t.datetime "starts_at"
     t.datetime "ends_at"
     t.text     "description"
+    t.string   "name"
     t.index ["location_id"], name: "index_events_on_location_id", using: :btree
     t.index ["organization_id"], name: "index_events_on_organization_id", using: :btree
   end

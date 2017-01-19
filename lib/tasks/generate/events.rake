@@ -15,7 +15,8 @@ namespace :generate do
                      location:        organization.location,
                      starts_at:       Faker::Time.between(days_from_now, days_from_now, :morning),
                      ends_at:         Faker::Time.between(days_from_now, days_from_now, :afternoon),
-                     description:     Faker::Lorem.sentence
+                     description:     Faker::Lorem.sentence,
+                     name:            Faker::Lorem.sentence(3)
       end
 
 

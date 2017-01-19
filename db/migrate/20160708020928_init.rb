@@ -57,6 +57,7 @@ class Init < ActiveRecord::Migration[5.0]
       t.datetime   :starts_at
       t.datetime   :ends_at
       t.text       :description
+      t.string     :name
     end
 
     create_table :event_registrations do |t|
