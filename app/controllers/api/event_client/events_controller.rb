@@ -1,6 +1,7 @@
 class Api::EventClient::EventsController < Api::EventClient::BaseController
 
-  rapid_actions model: Event.includes(:organization), serializer: ::EventClient::EventSerializer
+  #TODO: BDW 01/19/2017 - Add includes once rapid_api is updated to support it.
+  rapid_actions model: Event, serializer: ::EventClient::EventSerializer
 
   permit_params :location_id,
                 :organization_id,
