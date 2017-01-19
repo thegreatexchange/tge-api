@@ -50,7 +50,6 @@ class Init < ActiveRecord::Migration[5.0]
 
     create_table :people do |t|
       t.timestamps
-      t.string     :type
       t.belongs_to :school
       t.belongs_to :ministry
       t.string     :name

@@ -1,6 +1,6 @@
 class Api::EventClient::VolunteersController < Api::EventClient::BaseController
 
-  rapid_actions model:         People::Volunteer,
+  rapid_actions model:         Person,
                 serializer:    ::EventClient::VolunteerSerializer,
                 model_adapter: ::EventClient::VolunteerModelAdapter
 
@@ -10,8 +10,6 @@ class Api::EventClient::VolunteersController < Api::EventClient::BaseController
                 :name,
                 :email,
                 :phone_number,
-                :is_text_enabled,
-                :is_email_enabled,
                 :comments
 
 end

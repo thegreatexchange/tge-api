@@ -1,6 +1,6 @@
 class AdminClient::PersonSerializer < ActiveModel::Serializer
 
-  type 'volunteer'
+  type 'person'
 
   attributes :id,
              :created_at,
