@@ -6,6 +6,7 @@ class EventClient::VolunteerModelAdapter < RapidApi::ModelAdapters::ActiveRecord
     scope ||= {}
     klass.transaction do
       event_id = params.delete(:event_id)
+      organization = params.delete(:organization_id)
       comments = params.delete(:comments)
       create_params = params.merge scope
       member = klass.create create_params

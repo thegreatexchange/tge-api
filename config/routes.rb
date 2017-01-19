@@ -23,12 +23,11 @@ Rails.application.routes.draw do
     # Admin Client API
     ########################################
     namespace :admin_client, path: 'admin-client' do
-      resources :events,     only: [ :index, :show, :create, :update, :destroy ]
-      resources :locations,  only: [ :index, :show, :create, :update, :destroy ]
-      resources :ministries, only: [ :index, :show, :create, :update, :destroy ]
-      resources :people,     only: [ :index, :show, :create, :update, :destroy ]
-      resources :schools,    only: [ :index, :show, :create, :update, :destroy ]
-      resources :users,      only: [ :index, :show, :create, :update, :destroy ]
+      resources :events,        only: [ :index, :show, :create, :update, :destroy ]
+      resources :locations,     only: [ :index, :show, :create, :update, :destroy ]
+      resources :people,        only: [ :index, :show, :create, :update, :destroy ]
+      resources :organizations, only: [ :index, :show, :create, :update, :destroy ]
+      resources :users,         only: [ :index, :show, :create, :update, :destroy ]
     end
     ########################################
 
@@ -36,11 +35,10 @@ Rails.application.routes.draw do
     # Event Client API
     ########################################
     namespace :event_client, path: 'event-client' do
-      resources :events,     only: [ :index, :show                             ]
-      resources :locations,  only: [ :index, :show                             ]
-      resources :ministries, only: [ :index, :show                             ]
-      resources :schools,    only: [ :index, :show                             ]
-      resources :volunteers, only: [ :index, :show, :create, :update           ]
+      resources :events,        only: [ :index, :show                             ]
+      resources :locations,     only: [ :index, :show                             ]
+      resources :organizations, only: [ :index, :show                             ]
+      resources :volunteers,    only: [ :index, :show, :create, :update           ]
     end
     ########################################
   end

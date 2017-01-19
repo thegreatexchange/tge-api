@@ -4,8 +4,7 @@ class Api::EventClient::VolunteersController < Api::EventClient::BaseController
                 serializer:    ::EventClient::VolunteerSerializer,
                 model_adapter: ::EventClient::VolunteerModelAdapter
 
-  permit_params :school_id,
-                :ministry_id,
+  permit_params :organization_id,
                 :event_id,
                 :name,
                 :email,

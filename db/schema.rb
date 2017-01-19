@@ -33,17 +33,15 @@ ActiveRecord::Schema.define(version: 20160708020928) do
   end
 
   create_table "events", force: :cascade do |t|
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.integer  "location_id"
-    t.integer  "school_id"
-    t.integer  "ministry_id"
+    t.integer  "organization_id"
     t.datetime "starts_at"
     t.datetime "ends_at"
     t.text     "description"
     t.index ["location_id"], name: "index_events_on_location_id", using: :btree
-    t.index ["ministry_id"], name: "index_events_on_ministry_id", using: :btree
-    t.index ["school_id"], name: "index_events_on_school_id", using: :btree
+    t.index ["organization_id"], name: "index_events_on_organization_id", using: :btree
   end
 
   create_table "locations", force: :cascade do |t|
@@ -59,48 +57,22 @@ ActiveRecord::Schema.define(version: 20160708020928) do
     t.string   "timezone"
   end
 
-  create_table "ministries", force: :cascade do |t|
+  create_table "organizations", force: :cascade do |t|
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "location_id"
-    t.integer  "school_id"
     t.string   "name"
-    t.index ["location_id"], name: "index_ministries_on_location_id", using: :btree
-    t.index ["school_id"], name: "index_ministries_on_school_id", using: :btree
+    t.index ["location_id"], name: "index_organizations_on_location_id", using: :btree
   end
 
   create_table "people", force: :cascade do |t|
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
-    t.string   "type"
-    t.integer  "school_id"
-    t.integer  "ministry_id"
     t.string   "name"
     t.string   "email"
     t.string   "phone_number"
     t.boolean  "is_text_enabled"
     t.boolean  "is_email_enabled"
-    t.index ["ministry_id"], name: "index_people_on_ministry_id", using: :btree
-    t.index ["school_id"], name: "index_people_on_school_id", using: :btree
-  end
-
-  create_table "person_locations", force: :cascade do |t|
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.integer  "person_id"
-    t.integer  "location_id"
-    t.boolean  "is_active",   default: true
-    t.index ["location_id"], name: "index_person_locations_on_location_id", using: :btree
-    t.index ["person_id", "location_id"], name: "index_person_locations_on_person_id_and_location_id", using: :btree
-    t.index ["person_id"], name: "index_person_locations_on_person_id", using: :btree
-  end
-
-  create_table "schools", force: :cascade do |t|
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.integer  "location_id"
-    t.string   "name"
-    t.index ["location_id"], name: "index_schools_on_location_id", using: :btree
   end
 
   create_table "user_authorizations", force: :cascade do |t|

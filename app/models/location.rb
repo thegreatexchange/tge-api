@@ -15,7 +15,6 @@
 
 class Location < ApplicationRecord
 
-  has_many :schools
-  has_many :ministries
+  has_many :organizations
 
 end

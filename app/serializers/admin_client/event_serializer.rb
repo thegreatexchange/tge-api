@@ -8,7 +8,6 @@ class AdminClient::EventSerializer < ActiveModel::Serializer
              :description,
              :name
 
-  belongs_to :school,   embed: :id, serializer: AdminClient::SchoolSerializer
-  belongs_to :ministry, embed: :id, serializer: AdminClient::MinistrySerializer
+  belongs_to :organization, embed: :id, serializer: AdminClient::OrganizationSerializer
 
 end

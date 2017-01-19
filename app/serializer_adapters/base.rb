@@ -13,8 +13,6 @@ module SerializerAdapters
 
     # NOTE: Need to add support for :attributes serialization
     def deserialize_attributes(params, root_key)
-      #<ActionController::Parameters
-      #{"school"=>{"data"=>{"type"=>"schools", "id"=>"1"}}, "ministry"=>{"data"=>{"type"=>"ministries", "id"=>"1"}}} permitted: false>
       attributes = params.require(:data).require(:attributes)
       relationships = params.require(:data).require(:relationships)
       relationships.keys.each do |attribute|

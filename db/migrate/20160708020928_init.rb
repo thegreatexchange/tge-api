@@ -35,23 +35,14 @@ class Init < ActiveRecord::Migration[5.0]
       t.string  :timezone
     end
 
-    create_table :schools do |t|
+    create_table :organizations do |t|
       t.timestamps
       t.belongs_to :location
-      t.string     :name
-    end
-
-    create_table :ministries do |t|
-      t.timestamps
-      t.belongs_to :location
-      t.belongs_to :school
       t.string     :name
     end
 
     create_table :people do |t|
       t.timestamps
-      t.belongs_to :school
-      t.belongs_to :ministry
       t.string     :name
       t.string     :email
       t.string     :phone_number
@@ -62,8 +53,7 @@ class Init < ActiveRecord::Migration[5.0]
     create_table :events do |t|
       t.timestamps
       t.belongs_to :location
-      t.belongs_to :school
-      t.belongs_to :ministry
+      t.belongs_to :organization
       t.datetime   :starts_at
       t.datetime   :ends_at
       t.text       :description
@@ -74,14 +64,6 @@ class Init < ActiveRecord::Migration[5.0]
       t.belongs_to :event
       t.belongs_to :person
       t.text       :comments
-    end
-
-    create_table :person_locations do |t|
-      t.timestamps
-      t.belongs_to :person
-      t.belongs_to :location
-      t.index      [:person_id, :location_id]
-      t.boolean    :is_active, default: true
     end
 
   end
