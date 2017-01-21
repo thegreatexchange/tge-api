@@ -1,15 +1,17 @@
-########################################
-# Schema
-########################################
-# t.datetime "created_at",  null: false
-# t.datetime "updated_at",  null: false
-# t.integer  "location_id"
-# t.integer  "organization_id"
-# t.datetime "starts_at"
-# t.datetime "ends_at"
-# t.text     "description"
-# t.string   "name"
-########################################
+# == Schema Information
+#
+# Table name: events
+#
+#  id              :integer          not null, primary key
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  location_id     :integer
+#  organization_id :integer
+#  starts_at       :datetime
+#  ends_at         :datetime
+#  description     :text
+#  name            :string
+#
 
 class Event < ApplicationRecord
 

@@ -58,6 +58,16 @@ ActiveRecord::Schema.define(version: 20160708020928) do
     t.string   "timezone"
   end
 
+  create_table "organization_memberships", force: :cascade do |t|
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "organization_id"
+    t.integer  "person_id"
+    t.boolean  "is_primary"
+    t.index ["organization_id"], name: "index_organization_memberships_on_organization_id", using: :btree
+    t.index ["person_id"], name: "index_organization_memberships_on_person_id", using: :btree
+  end
+
   create_table "organizations", force: :cascade do |t|
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false

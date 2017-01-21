@@ -1,12 +1,14 @@
-########################################
-# Schema
-########################################
-# t.datetime "created_at", null: false
-# t.datetime "updated_at", null: false
-# t.integer  "event_id"
-# t.integer  "person_id"
-# t.text     "comments"
-########################################
+# == Schema Information
+#
+# Table name: event_registrations
+#
+#  id         :integer          not null, primary key
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  event_id   :integer
+#  person_id  :integer
+#  comments   :text
+#
 
 class EventRegistration < ApplicationRecord
 

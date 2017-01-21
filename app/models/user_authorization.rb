@@ -1,12 +1,14 @@
-########################################
-# Schema
-########################################
-# t.datetime "created_at",                      null: false
-# t.datetime "updated_at",                      null: false
-# t.integer  "user_id"
-# t.integer  "authorization_id"
-# t.boolean  "is_active",        default: true
-########################################
+# == Schema Information
+#
+# Table name: user_authorizations
+#
+#  id               :integer          not null, primary key
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  user_id          :integer
+#  authorization_id :integer
+#  is_active        :boolean          default(TRUE)
+#
 
 class UserAuthorization < ApplicationRecord
 

@@ -1,17 +1,16 @@
-########################################
-# Schema
-########################################
-# t.datetime "created_at",            null: false
-# t.datetime "updated_at",            null: false
-# t.string   "type"
-# t.integer  "organization_id"
-# t.string   "name"
-# t.string   "email"
-# t.string   "phone_number"
-# t.text     "registration_comments"
-# t.boolean  "is_text_enabled"
-# t.boolean  "is_email_enabled"
-########################################
+# == Schema Information
+#
+# Table name: people
+#
+#  id               :integer          not null, primary key
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  name             :string
+#  email            :string
+#  phone_number     :string
+#  is_text_enabled  :boolean
+#  is_email_enabled :boolean
+#
 
 class Person < ApplicationRecord
 

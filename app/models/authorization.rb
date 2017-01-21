@@ -1,11 +1,13 @@
-########################################
-# Schema
-########################################
-# t.datetime "created_at",  null: false
-# t.datetime "updated_at",  null: false
-# t.string   "name"
-# t.string   "description"
-########################################
+# == Schema Information
+#
+# Table name: authorizations
+#
+#  id          :integer          not null, primary key
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  name        :string
+#  description :string
+#
 
 class Authorization < ApplicationRecord
 

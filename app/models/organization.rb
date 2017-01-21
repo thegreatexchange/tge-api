@@ -1,11 +1,13 @@
-########################################
-# Schema
-########################################
-# t.datetime "created_at",  null: false
-# t.datetime "updated_at",  null: false
-# t.integer  "location_id"
-# t.string   "name"
-########################################
+# == Schema Information
+#
+# Table name: organizations
+#
+#  id          :integer          not null, primary key
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  location_id :integer
+#  name        :string
+#
 
 class Organization < ApplicationRecord
 

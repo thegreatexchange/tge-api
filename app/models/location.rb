@@ -1,17 +1,19 @@
-########################################
-# Schema
-########################################
-# t.datetime "created_at", null: false
-# t.datetime "updated_at", null: false
-# t.string   "name"
-# t.string   "country"
-# t.string   "region"
-# t.string   "state"
-# t.string   "city"
-# t.string   "zip"
-# t.string   "address"
-# t.string   "timezone"
-########################################
+# == Schema Information
+#
+# Table name: locations
+#
+#  id         :integer          not null, primary key
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  name       :string
+#  country    :string
+#  region     :string
+#  state      :string
+#  city       :string
+#  zip        :string
+#  address    :string
+#  timezone   :string
+#
 
 class Location < ApplicationRecord
 
