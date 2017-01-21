@@ -12,7 +12,8 @@
 class Organization < ApplicationRecord
 
   belongs_to :location
-  has_many   :ministries
+  has_many   :organization_memberships, dependent: :destroy
+  has_many   :people, through: :organization_memberships
 
   validates :name, presence:   true,
                    uniqueness: true

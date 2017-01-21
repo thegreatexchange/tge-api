@@ -54,7 +54,7 @@ class Init < ActiveRecord::Migration[5.0]
       t.timestamps
       t.belongs_to :organization
       t.belongs_to :person
-      t.boolean    :is_primary
+      t.boolean    :is_primary, default: false
     end
 
     create_table :events do |t|

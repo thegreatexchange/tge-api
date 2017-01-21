@@ -59,11 +59,11 @@ ActiveRecord::Schema.define(version: 20160708020928) do
   end
 
   create_table "organization_memberships", force: :cascade do |t|
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.integer  "organization_id"
     t.integer  "person_id"
-    t.boolean  "is_primary"
+    t.boolean  "is_primary",      default: false
     t.index ["organization_id"], name: "index_organization_memberships_on_organization_id", using: :btree
     t.index ["person_id"], name: "index_organization_memberships_on_person_id", using: :btree
   end
