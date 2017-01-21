@@ -50,6 +50,13 @@ class Init < ActiveRecord::Migration[5.0]
       t.boolean    :is_email_enabled
     end
 
+    create_table :organization_memberships do |t|
+      t.timestamps
+      t.belongs_to :organization
+      t.belongs_to :person
+      t.boolean    :is_primary
+    end
+
     create_table :events do |t|
       t.timestamps
       t.belongs_to :location
