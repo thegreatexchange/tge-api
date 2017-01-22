@@ -23,11 +23,12 @@ Rails.application.routes.draw do
     # Admin Client API
     ########################################
     namespace :admin_client, path: 'admin-client' do
-      resources :events,        only: [ :index, :show, :create, :update, :destroy ]
-      resources :locations,     only: [ :index, :show, :create, :update, :destroy ]
-      resources :people,        only: [ :index, :show, :create, :update, :destroy ]
-      resources :organizations, only: [ :index, :show, :create, :update, :destroy ]
-      resources :users,         only: [ :index, :show, :create, :update, :destroy ]
+      resources :events,                   only: [ :index, :show, :create, :update, :destroy ]
+      resources :locations,                only: [ :index, :show, :create, :update, :destroy ]
+      resources :people,                   only: [ :index, :show, :create, :update, :destroy ]
+      resources :organizations,            only: [ :index, :show, :create, :update, :destroy ]
+      resources :organization_memberships, only: [ :index, :show, :create, :update, :destroy ]
+      resources :users,                    only: [ :index, :show, :create, :update, :destroy ]
     end
     ########################################
 

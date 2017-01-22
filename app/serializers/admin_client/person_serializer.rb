@@ -9,5 +9,4 @@ class AdminClient::PersonSerializer < ActiveModel::Serializer
              :email,
              :phone_number
 
-
 end

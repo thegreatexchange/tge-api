@@ -15,10 +15,10 @@
 class Person < ApplicationRecord
 
   belongs_to :organization
-  has_many   :person_locations, dependent: :destroy
-  has_many   :locations, through: :person_locations
   has_many   :event_registrations, dependent: :destroy
   has_many   :events, through: :event_registrations
+  has_many   :organization_memberships, dependent: :destroy
+  has_many   :organizations, through: :organization_memberships
 
   validates :name,         presence:   true
   validates :email,        presence:   true,

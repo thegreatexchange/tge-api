@@ -9,4 +9,9 @@ class Api::AdminClient::EventsController < ApplicationController
                 :description,
                 :name
 
+  # TODO: push options down to rAPId
+  def self.adapted_model
+    AdminClient::BaseModelAdapter.new(model, { includes: :organization })
+  end
+
 end
