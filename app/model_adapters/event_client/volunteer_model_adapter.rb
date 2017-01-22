@@ -6,13 +6,19 @@ class EventClient::VolunteerModelAdapter < RapidApi::ModelAdapters::ActiveRecord
     scope ||= {}
     klass.transaction do
       event_id = params.delete(:event_id)
-      organization = params.delete(:organization_id)
+      organization_id = params.delete(:organization_id)
       comments = params.delete(:comments)
       create_params = params.merge scope
       member = klass.create create_params
+      if organization_id.present? && !member.errors.any?
+        organization = Organization.find organization_id
+
+        organization.organization_memberships.create person: member
+      end
+
       if event_id.present? && !member.errors.any?
         event = Event.find event_id
-        #TODO: Handle event not found.
+
         EventRegistration.create event: event, person: member, comments: comments
       end
       _query_result_for_member member
