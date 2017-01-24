@@ -1,6 +1,5 @@
 require 'faker'
 namespace :generate do
-
   namespace :users do
 
     desc "Seed users"
@@ -15,16 +14,44 @@ namespace :generate do
 
     desc "Generate super user"
     task :super, [:name, :email, :password] => [:environment] do |t, args|
-      name     = args[:name]     || 'Super Admin'
-      email    = args[:email]    || 'super@test.com'
-      password = args[:password] || 'password'
+      name     = args[:name]     || ENV['SUPER_NAME']     ||'Super Admin'
+      email    = args[:email]    || ENV['SUPER_EMAIL']    ||'super@test.com'
+      password = args[:password] || ENV['SUPER_PASSWORD'] || 'password'
 
-      User.create email:    email,
-                  name:     name,
-                  password: password,
-                  super:    true
+      super_user = User.create email:    email,
+                               name:     name,
+                               password: password
+
+      AuthorizationService.add_authorization user: super_user, name: Authorization::VALID_NAMES[:super]
+      AuthorizationService.add_authorization user: super_user, name: Authorization::VALID_NAMES[:app_admin]
+      AuthorizationService.add_authorization user: super_user, name: Authorization::VALID_NAMES[:app_event]
     end
 
-  end
+    desc "Generate admin user"
+    task :admin, [:name, :email, :password] => [:environment] do |t, args|
+      name     = args[:name]
+      email    = args[:email]
+      password = args[:password]
 
+      super_user = User.create email:    email,
+                               name:     name,
+                               password: password
+
+      AuthorizationService.add_authorization user: super_user, name: Authorization::VALID_NAMES[:app_admin]
+      AuthorizationService.add_authorization user: super_user, name: Authorization::VALID_NAMES[:app_event]
+    end
+
+    desc "Generate  user"
+    task :event, [:name, :email, :password] => [:environment] do |t, args|
+      name     = args[:name]
+      email    = args[:email]
+      password = args[:password]
+
+      super_user = User.create email:    email,
+                               name:     name,
+                               password: password
+
+      AuthorizationService.add_authorization user: super_user, name: Authorization::VALID_NAMES[:app_event]
+    end
+  end
 end

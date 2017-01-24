@@ -1,19 +1,17 @@
 require 'faker'
 namespace :generate do
-
   namespace :people do
 
     desc 'Seed people'
     task :seed, [ :count ] => [ :environment ] do |t, args|
-      count = args[:count] ? args[:count].to_i : 500
+      count = args[:count] ? args[:count].to_i : 250
       count.times do
-        Person.create name:         Faker::Name.name,
-                      email:        Faker::Internet.email,
-                      phone_number: Faker::PhoneNumber.phone_number,
-                      location:     "#{Faker::Address.city}, #{Faker::Address.state_abbr}"
+        name = Faker::Name.name
+        Person.create name:         name,
+                      email:        Faker::Internet.email(name),
+                      phone_number: Faker::PhoneNumber.phone_number
       end
     end
 
   end
-
 end

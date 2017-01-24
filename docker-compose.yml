@@ -26,15 +26,15 @@ services:
     volumes:
       - .:/myapp
     volumes_from:
-      - cache
+      - bundler-cache
 
-  cache:
+  bundler-cache:
     image: busybox
     volumes:
-      - /cache
+      - ./tmp/bundler-cache:/cache
 
-  client:
-    image: danlynn/ember-cli:2.5.1
+  admin-client:
+    image: danlynn/ember-cli:2.9.1
     volumes:
       - ../tge-admin-client:/myapp
     command: server --watcher polling --proxy=http://web:3000
@@ -43,3 +43,14 @@ services:
     ports:
       - "4200:4200"
       - "49152:49152"
+
+  event-client:
+    image: danlynn/ember-cli:2.8.0
+    volumes:
+      - ../tge-event-client:/myapp
+    command: server --watcher polling --proxy=http://web:3000 --port 4201
+    links:
+      - web
+    ports:
+      - "4201:4201"
+      - "49153:49153"
