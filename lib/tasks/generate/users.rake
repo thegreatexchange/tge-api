@@ -27,5 +27,31 @@ namespace :generate do
       AuthorizationService.add_authorization user: super_user, name: Authorization::VALID_NAMES[:app_event]
     end
 
+    desc "Generate admin user"
+    task :admin, [:name, :email, :password] => [:environment] do |t, args|
+      name     = args[:name]
+      email    = args[:email]
+      password = args[:password]
+
+      super_user = User.create email:    email,
+                               name:     name,
+                               password: password
+
+      AuthorizationService.add_authorization user: super_user, name: Authorization::VALID_NAMES[:app_admin]
+      AuthorizationService.add_authorization user: super_user, name: Authorization::VALID_NAMES[:app_event]
+    end
+
+    desc "Generate  user"
+    task :event, [:name, :email, :password] => [:environment] do |t, args|
+      name     = args[:name]
+      email    = args[:email]
+      password = args[:password]
+
+      super_user = User.create email:    email,
+                               name:     name,
+                               password: password
+
+      AuthorizationService.add_authorization user: super_user, name: Authorization::VALID_NAMES[:app_event]
+    end
   end
 end
