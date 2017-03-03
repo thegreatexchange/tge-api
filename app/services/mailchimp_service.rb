@@ -1,9 +1,11 @@
 class MailchimpService < BaseService
 
+  ########################################
   DOUBLE_OPTIN_SUBSCRIBE     = false
   UPDATE_UNIQUE_SUBSCRIPTION = true
   DELETE_ON_UNSUBSCRIBE      = true
-
+  EMAIL_TYPE                 = 'html'
+  ########################################
 
   def lists
     query_result = _mailchimp_client.lists.list
@@ -19,7 +21,7 @@ class MailchimpService < BaseService
     person = Person.find person_id
     names = person.name.split(' ')
 
-    subscription = {
+    subscriber = {
       email: person.email,
     }
 
@@ -30,15 +32,52 @@ class MailchimpService < BaseService
 
     query_result = _mailchimp_client.lists.subscribe(
       list_id,
-      subscription,
+      subscriber,
       merge_vars,
-      'html', #email_type
-      DOUBLE_OPTIN_SUBSCRIBE,  #double_optin
-      UPDATE_UNIQUE_SUBSCRIPTION,   #update_existing
-      true,   #replace_interests
-      false   #send_welcome
+      EMAIL_TYPE,
+      DOUBLE_OPTIN_SUBSCRIBE,
+      UPDATE_UNIQUE_SUBSCRIPTION,
+      false, #replace_interests
+      false #send_welcome
     )
     return_value query_result
+  end
+
+  def batch_subscribe!
+    person_ids = params[:person_ids] || []
+    list_id    = params[:list_id]
+    people = Person.where id: person_ids
+
+    subscribers = []
+
+    people.each do |person|
+      subscriber = {
+        email: person.email,
+      }
+
+      names = person.name.split(' ')
+      merge_vars = {
+        'FNAME' => names[0],
+        'LNAME' => names[-1]
+      }
+
+      subscribers << {
+        'EMAIL'      => subscriber,
+        'EMAIL_TYPE' => EMAIL_TYPE,
+        'MERGE_VARS' => merge_vars
+      }
+    end
+
+    if subscribers.any?
+      query_result = _mailchimp_client.lists.batch_subscribe(
+        list_id,
+        subscribers,
+        DOUBLE_OPTIN_SUBSCRIBE,
+        UPDATE_UNIQUE_SUBSCRIPTION,
+        false #replace_interests
+      )
+      return_value query_result
+    end
   end
 
   def unsubscribe!
@@ -46,20 +85,46 @@ class MailchimpService < BaseService
     list_id   = params[:list_id]
     person = Person.find person_id
 
-    subscription = {
+    subscriber = {
       email: person.email,
     }
 
     query_result = _mailchimp_client.lists.unsubscribe(
       list_id,
-      subscription,
-      DELETE_ON_UNSUBSCRIBE,  #delete_member
+      subscriber,
+      DELETE_ON_UNSUBSCRIBE,
       false, #send_goodbye
       false, #send_notify
     )
     return_value query_result
   end
 
+  def batch_unsubscribe!
+    person_ids = params[:person_ids] || []
+    list_id    = params[:list_id]
+    people = Person.where id: person_ids
+
+    subscribers = []
+
+    people.each do |person|
+      subscriber = {
+        email: person.email,
+      }
+
+      subscribers << person.email
+    end
+
+    if subscribers.any?
+      query_result = _mailchimp_client.lists.batch_unsubscribe(
+        list_id,
+        subscribers,
+        DELETE_ON_UNSUBSCRIBE,
+        false, #send_goodbye
+        false, #send_notify
+      )
+      return_value query_result
+    end
+  end
   def members
     return_value _mailchimp_client.lists.members(params[:list_id])["data"]
   end
