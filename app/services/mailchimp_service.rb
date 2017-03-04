@@ -30,6 +30,7 @@ class MailchimpService < BaseService
       'LNAME' => names[-1]
     }
 
+    log_activity 'subscribe', params
     query_result = _mailchimp_client.lists.subscribe(
       list_id,
       subscriber,
@@ -69,6 +70,7 @@ class MailchimpService < BaseService
     end
 
     if subscribers.any?
+      log_activity 'batch_subscribe', params
       query_result = _mailchimp_client.lists.batch_subscribe(
         list_id,
         subscribers,
@@ -89,6 +91,7 @@ class MailchimpService < BaseService
       email: person.email,
     }
 
+    log_activity 'batch_unsubscribe', params
     query_result = _mailchimp_client.lists.unsubscribe(
       list_id,
       subscriber,
@@ -151,6 +154,10 @@ class MailchimpService < BaseService
         name: list_hash["name"]
       }
     end
+  end
+
+  def log_activity(event, message)
+    Rails.logger.info("Mailchimp API: #{event} - #{message}")
   end
 
 end

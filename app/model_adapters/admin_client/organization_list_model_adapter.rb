@@ -24,7 +24,7 @@ class AdminClient::OrganizationListModelAdapter < AdminClient::BaseModelAdapter
           organizationList.destroy
         else
           #TODO: Handle this more cleanly
-          raise "Failure removing organization to mailchimp"
+          raise "Failure removing organization from mailchimp"
         end
       end
       _query_result_for_member organizationList
