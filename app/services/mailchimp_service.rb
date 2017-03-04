@@ -145,7 +145,10 @@ class MailchimpService < BaseService
 
   def _format_lists(mc_lists)
     mc_lists.map do |list_hash|
-      [list_hash["id"], list_hash["name"]]
+      {
+        id:   list_hash["id"],
+        name: list_hash["name"]
+      }
     end
   end
 

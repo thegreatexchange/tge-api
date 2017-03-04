@@ -29,6 +29,9 @@ Rails.application.routes.draw do
       resources :organizations,            only: [ :index, :show, :create, :update, :destroy ]
       resources :organization_memberships, only: [ :index, :show, :create, :update, :destroy ]
       resources :users,                    only: [ :index, :show, :create, :update, :destroy ]
+      namespace :mailchimp do
+        resources :lists,                  only: [ :index                                    ]
+      end
     end
     ########################################
 
