@@ -13,6 +13,7 @@ class OrganizationList < ApplicationRecord
 
   belongs_to :organization
 
+  validates :organization_id,   presence: true
   validates :mailchimp_list_id, presence: true,
                                 uniqueness: { scope: :organization_id }
 

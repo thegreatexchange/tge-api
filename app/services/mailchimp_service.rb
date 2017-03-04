@@ -111,7 +111,7 @@ class MailchimpService < BaseService
         email: person.email,
       }
 
-      subscribers << person.email
+      subscribers << subscriber
     end
 
     if subscribers.any?
@@ -125,6 +125,7 @@ class MailchimpService < BaseService
       return_value query_result
     end
   end
+
   def members
     return_value _mailchimp_client.lists.members(params[:list_id])["data"]
   end
