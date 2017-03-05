@@ -129,6 +129,13 @@ class MailchimpService < BaseService
     end
   end
 
+  def groups
+    group_categories = _mailchimp_client.lists.interest_groupings(params[:list_id])
+    if group_categories.any?
+      return_value _format_groups(group_categories)
+    end
+  end
+
   def members
     return_value _mailchimp_client.lists.members(params[:list_id])["data"]
   end
@@ -152,6 +159,21 @@ class MailchimpService < BaseService
       {
         id:   list_hash["id"],
         name: list_hash["name"]
+      }
+    end
+  end
+
+  def _format_groups(mc_group_categories)
+    mc_group_categories.map do |c|
+      {
+        id:   c['id'],
+        name: c['name'],
+        groups: c['groups'].map do |g|
+          {
+            id: g['id'],
+            name: g['name']
+          }
+        end
       }
     end
   end
