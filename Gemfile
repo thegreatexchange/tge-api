@@ -8,6 +8,7 @@ gem 'active_model_serializers', '~> 0.10.0'
 gem 'attr_encrypted',           git: 'https://github.com/attr-encrypted/attr_encrypted.git'
 gem 'faker'
 gem 'redis'
+gem 'mailchimp-api',            require: 'mailchimp'
 
 group :development, :test do
   gem 'byebug', platform: :mri
