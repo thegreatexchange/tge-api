@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160708020928) do
+ActiveRecord::Schema.define(version: 20170304164743) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,14 @@ ActiveRecord::Schema.define(version: 20160708020928) do
     t.string   "zip"
     t.string   "address"
     t.string   "timezone"
+  end
+
+  create_table "organization_lists", force: :cascade do |t|
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.integer  "organization_id"
+    t.string   "mailchimp_list_id"
+    t.index ["organization_id"], name: "index_organization_lists_on_organization_id", using: :btree
   end
 
   create_table "organization_memberships", force: :cascade do |t|

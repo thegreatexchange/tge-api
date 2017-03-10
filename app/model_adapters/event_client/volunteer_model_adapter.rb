@@ -2,8 +2,7 @@ require 'rapid_api/model_adapters'
 
 class EventClient::VolunteerModelAdapter < RapidApi::ModelAdapters::ActiveRecordAdapter
 
-  def create(params, scope=nil)
-    scope ||= {}
+  def create(params, scope={})
     klass.transaction do
       event_id = params.delete(:event_id)
       organization_id = params.delete(:organization_id)
