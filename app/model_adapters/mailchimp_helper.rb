@@ -3,12 +3,13 @@ class MailchimpHelper
   def self.add_member_to_mailchimp_list_for(organizationMembership)
     organization_id = organizationMembership.organization_id
     person_id       = organizationMembership.person_id
-    list_ids        = OrganizationList.where(organization_id: organization_id).pluck(:mailchimp_list_id)
-    return true if list_ids.empty?
+    lists           = OrganizationList.where(organization_id: organization_id)
+    return true if lists.empty?
 
     #TODO: Throwing this over the fence and assuming it works. Need more robust handling.
-    list_ids.each do |list_id|
-      MailchimpService.subscribe!(list_id: list_id, person_id: person_id)
+    lists.each do |list|
+      groupings = format_groupings list.categories
+      MailchimpService.subscribe!(list_id: list.mailchimp_list_id, person_id: person_id, groupings: groupings)
     end
 
     return true
@@ -46,11 +47,12 @@ class MailchimpHelper
   def self.add_members_to_mailchimp_list_for(organizationList)
     organization_id = organizationList.organization_id
     list_id         = organizationList.mailchimp_list_id
+    groupings       = format_groupings organizationList.categories
     person_ids = OrganizationMembership.where(organization_id: organization_id).pluck(:person_id)
     return true if person_ids.empty?
 
     #TODO: Throwing this over the fence and assuming it works. Need more robust handling.
-    MailchimpService.batch_subscribe!(list_id: list_id, person_ids: person_ids)
+    MailchimpService.batch_subscribe!(list_id: list_id, person_ids: person_ids, groupings: groupings)
 
     return true
   end
@@ -80,6 +82,15 @@ class MailchimpHelper
     }
     filtered_out_person_ids = ActiveRecord::Base.connection.execute(q).to_a.map {|r| r['person_id']}
     person_ids - filtered_out_person_ids
+  end
+
+  def self.format_groupings(categories)
+    groupings = []
+    categories.each do |c|
+      groups = c['groups'].select {|g| g['selected'] == true}.map {|g| g['name']}
+      groupings << {name: c['name'], groups: groups}
+    end
+    groupings
   end
 
 end
