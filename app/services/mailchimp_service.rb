@@ -4,6 +4,7 @@ class MailchimpService < BaseService
   DOUBLE_OPTIN_SUBSCRIBE     = false
   UPDATE_UNIQUE_SUBSCRIPTION = true
   DELETE_ON_UNSUBSCRIBE      = true
+  REPLACE_INTERESTS          = true
   EMAIL_TYPE                 = 'html'
   ########################################
 
@@ -18,6 +19,12 @@ class MailchimpService < BaseService
   def subscribe!
     person_id = params[:person_id]
     list_id   = params[:list_id]
+    groupings = params[:groupings] || []
+    # Array of Group Categories in the form of:
+    # {
+    #   name: 'Category 1',
+    #   groups: ['Group 1', 'Group 2']
+    # }
     person = Person.find person_id
     names = person.name.split(' ')
 
@@ -26,8 +33,9 @@ class MailchimpService < BaseService
     }
 
     merge_vars = {
-      'FNAME' => names[0],
-      'LNAME' => names[-1]
+      'FNAME'     => names[0],
+      'LNAME'     => names[-1],
+      'GROUPINGS' => groupings
     }
 
     log_activity 'subscribe', params
@@ -38,7 +46,7 @@ class MailchimpService < BaseService
       EMAIL_TYPE,
       DOUBLE_OPTIN_SUBSCRIBE,
       UPDATE_UNIQUE_SUBSCRIPTION,
-      false, #replace_interests
+      REPLACE_INTERESTS,
       false #send_welcome
     )
     return_value query_result
@@ -47,6 +55,7 @@ class MailchimpService < BaseService
   def batch_subscribe!
     person_ids = params[:person_ids] || []
     list_id    = params[:list_id]
+    groupings  = params[:groupings]
     people = Person.where id: person_ids
 
     subscribers = []
@@ -58,8 +67,9 @@ class MailchimpService < BaseService
 
       names = person.name.split(' ')
       merge_vars = {
-        'FNAME' => names[0],
-        'LNAME' => names[-1]
+        'FNAME'     => names[0],
+        'LNAME'     => names[-1],
+        'GROUPINGS' => groupings
       }
 
       subscribers << {
@@ -76,7 +86,7 @@ class MailchimpService < BaseService
         subscribers,
         DOUBLE_OPTIN_SUBSCRIBE,
         UPDATE_UNIQUE_SUBSCRIPTION,
-        false #replace_interests
+        REPLACE_INTERESTS
       )
       return_value query_result
     end
@@ -91,7 +101,7 @@ class MailchimpService < BaseService
       email: person.email,
     }
 
-    log_activity 'batch_unsubscribe', params
+    log_activity 'unsubscribe', params
     query_result = _mailchimp_client.lists.unsubscribe(
       list_id,
       subscriber,
@@ -118,6 +128,7 @@ class MailchimpService < BaseService
     end
 
     if subscribers.any?
+      log_activity 'batch_unsubscribe', params
       query_result = _mailchimp_client.lists.batch_unsubscribe(
         list_id,
         subscribers,
